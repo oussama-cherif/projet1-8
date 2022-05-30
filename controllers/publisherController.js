@@ -3,7 +3,7 @@ const Publisher = require('../models/Publisher')
 const getPublisher = async (req, res) => {
   try {
     const publisherId = req.params.id
-    const publisher = await Publisher.findOne(publisherId)
+    const publisher = await Publisher.findById(publisherId)
     res.status(200).json({
       publisher
     })

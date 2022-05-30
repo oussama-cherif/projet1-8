@@ -3,7 +3,7 @@ const Author = require('../models/Author')
 const getAuthor = async (req, res) => {
   try {
     const authorId = req.params.id
-    const author = await Author.findOne(authorId)
+    const author = await Author.findById(authorId)
     res.status(200).json({
       author
     })
@@ -34,7 +34,7 @@ const updateAuthor = async (req, res) => {
   try {
     const {firstName, lastName, age} = req.body
     const authorId = req.params.id
-    const author = await Author.findOneAndUpdate({authorId},{
+    const author = await Author.findByIdAndUpdate({authorId},{
       firstName, lastName, age
     })
     res.status(200).json({
@@ -50,7 +50,7 @@ const updateAuthor = async (req, res) => {
 const deleteAuthor = async (req, res) => {
   try {
     const authorId = req.params.id
-    const author = await Author.findOneAndDelete(authorId)
+    const author = await Author.findByIdAndDelete(authorId)
     res.status(200).json({
       author
     })

@@ -4,9 +4,9 @@ var router = express.Router();
 const {getPublisher, addPublisher, deletePublisher, updatePublisher} = require ('../controllers/publisherController')
 
 router.route('/')
-  .get(getPublisher)
   .post(addPublisher)
 router.route('/:id')
+  .get(getPublisher)
   .put(updatePublisher)
   .delete(deletePublisher)
 
