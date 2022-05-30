@@ -29,9 +29,9 @@ const getBook = async (req, res) => {
 
 const addBook = async (req, res) => {
   try {
-    const {title, description, date, author, publisher} = req.body
+    const {title, description, publication_date, author, publisher} = req.body
     const book = await Book.create({
-    title, description, date, author, publisher
+    title, description, publication_date, author, publisher
     })
     res.status(200).json({
       book
@@ -45,13 +45,14 @@ const addBook = async (req, res) => {
 
 const updateBook = async (req, res) => {
   try {
-    const {title, description, date, author, publisher} = req.body
+    const {title, description, publication_date, author, publisher} = req.body
     const bookId = req.params.id
-    const book = await Book.findByIdAndUpdate({bookId},{
-      title, description, date, author, publisher
+    const book = await Book.findOneAndUpdate({bookId},{
+      title, description, publication_date, author, publisher
     })
+    const updatedBook = await book.save()
     res.status(200).json({
-      book
+      updatedBook
     })
   } catch(err) {
     res.status(500).json({
@@ -63,7 +64,7 @@ const updateBook = async (req, res) => {
 const deleteBook = async (req, res) => {
   try {
     const bookId = req.params.id
-    const book = await Book.findByIdAndDelete(bookId)
+    const book = await Book.findOneAndDelete(bookId)
     res.status(200).json({
       book
     })
